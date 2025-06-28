@@ -1,0 +1,26 @@
+services:
+  moodleapp:
+    image: ${IMAGE_NAME}
+    container_name: moodleapp
+    ports:
+      - 80:80
+    volumes:
+      - moodledata:/var/www/moodledata
+
+    depends_on:
+      - moodledb
+  # MySQL DB Service
+  moodledb:
+    image: mysql:8.4.5
+    container_name: clouddb
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpat123
+      MYSQL_DATABASE: patdb
+      MYSQL_USER: patuser
+      MYSQL_PASSWORD: pat123
+    volumes:
+      - clouddbdata:/var/lib/mysql
+    
+volumes:
+  clouddbdata:
+  moodledata:
